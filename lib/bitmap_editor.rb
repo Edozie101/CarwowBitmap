@@ -25,7 +25,8 @@ class BitmapEditor
            self.matrix = change_x_value(line[1],line[2],line[3],line[4],self.matrix)
            puts self.matrix.to_s
       when 'V'
-          puts  "There is a V"
+           self.matrix = change_y_value(line[1],line[2],line[3],line[4],self.matrix)
+           puts self.matrix.to_s
       when 'C'
           self.matrix = self.blankmatrix
       when 'I'
@@ -55,7 +56,7 @@ class BitmapEditor
     x = x.to_i
     y = y.to_i
      matrix = m     
-     matrix[x-1][y-1] = colour
+     matrix[y-1][x-1] = colour
      return matrix
 
   end
@@ -81,5 +82,18 @@ class BitmapEditor
         matrix[y-1][n-1] = colour
     end
     return matrix
+  end
+
+  def assert_size_mismatch?(x,y,m)
+      supy = m.length 
+      supx = m[0].length
+
+      if (x > supx)
+
+      elsif (y > sup y)
+
+      else
+        puts "Size is all good"
+      end 
   end
 end
