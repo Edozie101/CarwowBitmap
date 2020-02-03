@@ -14,7 +14,7 @@ class BitmapEditor
     File.open(file).each do |line|
       line = line.split(" ")
       case line.first()
-      when 'S'
+      when 'I'
           self.matrix = create_matrix(line[1],line[2])
           self.blankmatrix = self.matrix
           puts self.matrix.to_s
@@ -29,8 +29,10 @@ class BitmapEditor
            puts self.matrix.to_s
       when 'C'
           self.matrix = self.blankmatrix
-      when 'I'
-         puts  "There is an I"
+      when 'S'
+           self.matrix.each do |n|
+            puts n 
+           end
       else
           puts line.to_s 
       end
@@ -38,9 +40,12 @@ class BitmapEditor
   end
 
   def create_matrix(x,y,m=[]) 
-      x = x.to_i
-      y = y.to_i
-      matrix = m
+      x = x.to_i  ; y = y.to_i ; matrix = m
+      begin
+        assert_incorrect_barrier?(x,y)
+      rescue  ArgumentError => e
+         puts e.message()
+      end
       r=0
       y.times do
         matrix.push([])
@@ -55,6 +60,11 @@ class BitmapEditor
   def change_x_y_value(x,y,colour,m)
     x = x.to_i
     y = y.to_i
+    begin
+      assert_size_mismatch?(x,y,m)
+    rescue  ArgumentError => e
+       puts e.message()
+    end
      matrix = m     
      matrix[y-1][x-1] = colour
      return matrix
@@ -67,7 +77,7 @@ class BitmapEditor
     y1 = y1.to_i
     y2 = y2.to_i
     matrix = m
-    (y1...y2).each do |n|
+    (y1..y2).each do |n|
       matrix[n-1][x-1] = colour
     end
     return matrix
@@ -89,11 +99,38 @@ class BitmapEditor
       supx = m[0].length
 
       if (x > supx)
-
-      elsif (y > sup y)
-
+        raise ArgumentError.new("The X value is too large ")
+      elsif (y > supy)
+         raise ArgumentError.new("The Y value is too large ")
       else
         puts "Size is all good"
       end 
+  end
+
+  def assert_size_xs_mismatch?(x1,x2,y,m)
+    supy = m.length 
+    supx = m[0].length
+
+    if (x2 > supx || x1 < 0)
+      raise ArgumentError.new("The X value is too large ")
+    elsif (y > supy)
+       raise ArgumentError.new("The Y value is too large ")
+    else
+      puts "Size is all good"
+    end 
+end
+
+
+  def assert_incorrect_barrier?(x,y)
+    supy =  250
+    supx =  250
+
+    if (x > supx || x < 0 )
+      raise ArgumentError.new("The X value is out of bounds")
+    elsif (y > supy || y < 0)
+       raise ArgumentError.new("The Y value is out of bounds ")
+    else
+      puts "Size is all good"
+    end 
   end
 end
