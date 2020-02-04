@@ -92,8 +92,6 @@ class BitmapEditor
        abort("Huston we have a problem " + e.message)
 
     end
-
-    
       (y1..y2).each do |n|
         matrix[n-1][x-1] = colour
       end
@@ -124,7 +122,7 @@ class BitmapEditor
       
     if m.nil? or x.nil? or y.nil? or m[0].nil?
       raise ArgumentError.new("NilValue ")
-
+      abort("You've entered a Nil Entry")
     end
       supy = m.length 
       supx = m[0].length
@@ -139,8 +137,10 @@ class BitmapEditor
   end
 
   def assert_size_xs_mismatch?(x1,x2,y,m)
-    if m.nil? or x.nil? or y.nil? or m[0].nil?
+    if m.nil? or y.nil? or x2.nil? or x1.nil? or m[0].nil?
       raise ArgumentError.new("NilValue ")
+      abort("You've entered a Nil Entry")
+
     end
     supy = m.length 
     supx = m[0].length
@@ -157,8 +157,10 @@ class BitmapEditor
   end
 
   def assert_size_ys_mismatch?(x,y1,y2,m)
-    if m.nil? or x.nil? or y.nil? or m[0].nil?
+    if m.nil? or x.nil? or y2.nil? or y1.nil? or m[0].nil?
       raise ArgumentError.new("NilValue ")
+      abort("You've entered a Nil Entry")
+
     end
 
     supy = m.length 
