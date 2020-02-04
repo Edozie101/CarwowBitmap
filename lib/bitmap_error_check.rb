@@ -58,6 +58,12 @@ module BitmapErrorCheck
 
 
     def assert_incorrect_barrier?(x,y)
+        #  edgecase test and abort if incorrect - to create x and y
+
+        if x.nil? or y.nil?
+            abort("NilValue in your I function ")
+        end
+
         supy =  250
         supx =  250
 

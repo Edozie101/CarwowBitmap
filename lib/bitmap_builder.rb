@@ -43,7 +43,6 @@ module BitmapBuilder
     matrix = m
     begin
       # Validate Values before building to gracefully fail if an error exists
-
       assert_size_ys_mismatch?(x,y1,y2,matrix)
     rescue  ArgumentError => e
        abort("Houston we have a problem " + e.message)
@@ -62,7 +61,7 @@ module BitmapBuilder
       assert_size_xs_mismatch?(x1,x2,y,m)
     rescue ArgumentError => e
         err = e
-        abort("Huston we have a problem " + e.message)
+        abort("Houston we have a problem " + e.message)
     end
     (x1..x2).each do |n|
         matrix[y-1][n-1] = colour
