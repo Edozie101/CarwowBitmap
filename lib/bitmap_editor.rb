@@ -13,7 +13,6 @@ class BitmapEditor
     return puts "please provide correct file" if file.nil? || !File.exists?(file)
 
     File.open(file).each do |line|
-      errorcheck(matrix)
       line = line.split(" ")
       case line.first()
       when 'I'
@@ -43,14 +42,12 @@ class BitmapEditor
       x = x.to_i  
       y = y.to_i
       matrix = m
-      err = nil
       begin
         assert_incorrect_barrier?(x,y)
       rescue  ArgumentError => e
-         err = e.message
-         puts e.message()
+        abort("Huston we have a problem " + e.message)
+
       end
-      if err.nil?
         r=0
         y.times do
           matrix.push([])
@@ -60,32 +57,24 @@ class BitmapEditor
           r +=1
         end
         return matrix
-      else
-        return e
-    
-      end
+      
   end
 
   def change_x_y_value(x,y,colour,m)
     x = x.to_i
     y = y.to_i
     matrix = m  
-    err = nil
     begin
       puts "changing xy"
       puts matrix.class
       assert_size_mismatch?(x,y,m)
     rescue  ArgumentError => e
-       err = e
-       puts e.message()
-    end
-     if err.nil?
+       abort("Huston we have a problem " + e.message)
+      end
    
       matrix[y-1][x-1] = colour
       return matrix
-     else 
-      return err
-     end
+    
 
   end
 
@@ -95,24 +84,21 @@ class BitmapEditor
     y1 = y1.to_i
     y2 = y2.to_i
     matrix = m
-    err = nil
     begin
       puts "change y value func"
       puts matrix.class
       assert_size_ys_mismatch?(x,y1,y2,matrix)
     rescue  ArgumentError => e
-      err = e
-       puts e.message()
+       abort("Huston we have a problem " + e.message)
+
     end
 
-    if err.nil?
+    
       (y1..y2).each do |n|
         matrix[n-1][x-1] = colour
       end
       return matrix
-    else 
-      return err
-    end
+  
   end
 
   def change_x_value(x1,x2,y, colour, m)
@@ -120,32 +106,28 @@ class BitmapEditor
     x1 = x1.to_i
     x2 = x2.to_i
     matrix = m
-    err = nil
     begin
       puts "in x change value"
       assert_size_xs_mismatch?(x1,x2,y,m)
     rescue ArgumentError => e
         err = e
-        puts e.message
+        abort("Huston we have a problem " + e.message)
     end
-    if err.nil?
       (x1..x2).each do |n|
           matrix[y-1][n-1] = colour
       end
       return matrix
-    else 
-      return e
-    end
+   
   end
 
   def assert_size_mismatch?(x,y,m)
+      
+    if m.nil? or x.nil? or y.nil? or m[0].nil?
+      raise ArgumentError.new("NilValue ")
+
+    end
       supy = m.length 
       supx = m[0].length
-      if m.nil? or x.nil? or y.nil? 
-        raise ArgumentError.new("NilValue ")
-
-      end
-     
 
       if (x > supx)
         raise ArgumentError.new("The X value is too large ")
@@ -157,6 +139,9 @@ class BitmapEditor
   end
 
   def assert_size_xs_mismatch?(x1,x2,y,m)
+    if m.nil? or x.nil? or y.nil? or m[0].nil?
+      raise ArgumentError.new("NilValue ")
+    end
     supy = m.length 
     supx = m[0].length
 
@@ -172,8 +157,9 @@ class BitmapEditor
   end
 
   def assert_size_ys_mismatch?(x,y1,y2,m)
-    puts "y mismatch" 
-    puts m.length
+    if m.nil? or x.nil? or y.nil? or m[0].nil?
+      raise ArgumentError.new("NilValue ")
+    end
 
     supy = m.length 
     supx = m[0].length
