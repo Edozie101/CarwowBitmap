@@ -4,17 +4,16 @@ module BitmapErrorCheck
     def assert_size_mismatch?(x,y,m)
         #  edgecase test and abort if incorrect - to create supx and supy
         if m.nil? or x.nil? or y.nil? or m[0].nil?
-           abort("NilValue in your I function ")
+           abort("NilValue in your L function ")
         end
         supy = m.length 
         supx = m[0].length
 
         if (x > supx)
-            raise ArgumentError.new("The X value is too large your I function ")
+            raise ArgumentError.new("The X value is too large your L function ")
         elsif (y > supy)
-            raise ArgumentError.new("The Y value is too large your I function ")
+            raise ArgumentError.new("The Y value is too large your L function ")
         else
-            puts "∫o su∂ve"
         end 
     end
 
