@@ -4,6 +4,7 @@ class BitmapEditor
      require './lib/bitmap_builder.rb'
      include BitmapErrorCheck
      include BitmapBuilder
+     IFILE = ""
 
     def initialize
       @matrix = []

@@ -42,6 +42,8 @@ module BitmapBuilder
   def change_y_value(x,y1,y2, colour,m)
     matrix = m
     begin
+      # Validate Values before building to gracefully fail if an error exists
+
       assert_size_ys_mismatch?(x,y1,y2,matrix)
     rescue  ArgumentError => e
        abort("Houston we have a problem " + e.message)
@@ -56,6 +58,7 @@ module BitmapBuilder
   def change_x_value(x1,x2,y, colour, m)
     matrix = m
     begin
+      # Validate Values before building to gracefully fail if an error exists
       assert_size_xs_mismatch?(x1,x2,y,m)
     rescue ArgumentError => e
         err = e
