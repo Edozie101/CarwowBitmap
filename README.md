@@ -1,3 +1,7 @@
+
+![Alt Text](https://www.thesearchologist.com/wp-content/uploads/2018/05/carwow-logo600-high2.png)
+
+
 Carwow test focused on producing a bitmap represented as an M x N matrix of pixels with each element representing a colour.
 ![Alt Text](https://media.giphy.com/media/Uv0VUrAT6FtMQ/giphy.gif)
 # Commands
